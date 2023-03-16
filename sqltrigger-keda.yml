@@ -6,7 +6,7 @@ metadata:
   name: testes-sitecontagem-scaledobject
 spec:
   pollingInterval: 20
-  minReplicaCount: 2
+  minReplicaCount: 1
   maxReplicaCount: 10
   scaleTargetRef:
     name: testes-sitecontagem
