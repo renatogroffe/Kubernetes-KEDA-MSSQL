@@ -1,0 +1,19 @@
+# Trigger do MS-SQL (válido também para Azure SQL)
+# https://keda.sh/docs/2.10/scalers/mssql/
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: testes-sitecontagem-scaledobject
+spec:
+  pollingInterval: 20
+  minReplicaCount: 2
+  maxReplicaCount: 10
+  scaleTargetRef:
+    name: testes-sitecontagem
+  triggers:
+  - type: mssql
+    metadata:
+      connectionStringFromEnv: ConnectionStrings__BaseContagem
+      query: "SELECT COUNT(1) FROM dbo.HistoricoContagem WHERE FlProcessado = 0"
+      targetValue: "50"
+      activationTargetValue: '1'
